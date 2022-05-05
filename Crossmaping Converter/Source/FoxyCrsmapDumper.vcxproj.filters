@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Rage">
+      <UniqueIdentifier>{484bf651-1758-46a6-adaf-c3f040095141}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Pointers">
+      <UniqueIdentifier>{f195e0ff-116b-4772-bb09-e37810d83561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Pointers\Memory">
+      <UniqueIdentifier>{b51c50b2-4d6a-4955-9e5e-926b385e8b16}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="classes.h">
+      <Filter>Header Files\Rage</Filter>
+    </ClInclude>
+    <ClInclude Include="nspcrage.h">
+      <Filter>Header Files\Rage</Filter>
+    </ClInclude>
+    <ClInclude Include="memscanner.h">
+      <Filter>Header Files\Pointers\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="pointers.h">
+      <Filter>Header Files\Pointers</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="crossmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

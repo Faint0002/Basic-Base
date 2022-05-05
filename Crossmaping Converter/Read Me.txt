@@ -1,0 +1,14 @@
+This converts a crossmap from { 0x(FIRST_UPDATE), 0x(CURRENT_UPDAYE) } to { 0x(FIRST_UPDDATE), 0x(CURRENT_ENTRYPOINT) }
+Place your crossmapping in C:\Foxy\
+Your RageHashMap.hpp will be in C:\Foxy\Dumps\
+
+Notes:
+- This will only work with the correct formatting which is the BigBaseV1 style formatting (without the last line and first few lines, you should only put the contents of m_Crossmap)
+- This was last updated on 3/5/2022 and it may break at any point in time.
+- No support will be provided on this tool or any future versions of this tool.
+
+Contacts:
+Email - diorcheats.vali@gmail.com
+Discord - Vali#0004
+Reddit - diorvali
+YouTube - Falling Star
