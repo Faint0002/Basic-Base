@@ -17,7 +17,7 @@ namespace Base::Core::Mem {
 			m_SciptGlobals = ptr.add(3).rip().as<decltype(m_SciptGlobals)>();
 		});
 		//Fix Vectors (Used for fixing vectors because of some odd padding system, called in the invoker) (RAGE\Invoker)
-		g_mainBatch.add("FV", "83 79 18 ? 48 8B D1 74 4A FF 4A 18 48 63 4A 18 48 8D 41 04 48 8B 4C CA", [=](memory ptr) {
+		g_mainBatch.add("FV", "83 79 18 00 48 8B D1 74 4A FF 4A 18 48 63 4A 18 48 8D 41 04 48 8B 4C CA", [=](memory ptr) {
 			m_FixVectors = ptr.as<decltype(m_FixVectors)>();
 		});
 		//Native Return Address (Used for changing and storing the native return address, called in the invoker) (RAGE\Invoker)
