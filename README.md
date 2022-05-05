@@ -1,12 +1,12 @@
 # Basic-Base
  A UC Base for GTA5 made in 2 or so days
 
-# Liscene:
-- This project is liscened under the GNU General Public License Version 3
+# License:
+- This project is licensed under the GNU General Public License Version 3
 - Please visit https://www.gnu.org/licenses/gpl-3.0.en.html for all terms and conditions related to this project.
 
 # Issues
-- None
+- HashMapping must be changed for steam
 
 # Projects used
 - ImGui (github.com/ocornut/imgui)
