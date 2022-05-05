@@ -6,7 +6,7 @@
 - Please visit https://www.gnu.org/licenses/gpl-3.0.en.html for all terms and conditions related to this project.
 
 # Issues
-- None
+- HashMapping must be changed for steam
 
 # Projects used
 - ImGui (github.com/ocornut/imgui)
