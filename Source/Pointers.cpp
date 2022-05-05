@@ -16,12 +16,8 @@ namespace Base::Core::Mem {
 		g_mainBatch.add("SG", "48 8D 15 ? ? ? ? 4C 8B C0 E8 ? ? ? ? 48 85 FF 48 89 1D", [=](memory ptr) {
 			m_SciptGlobals = ptr.add(3).rip().as<decltype(m_SciptGlobals)>();
 		});
-		//Model Spawn Bypass (Used for restoring and patching vehicles, bypasses RAGE's detection of dirty vehicles) (RAGE)
-		g_mainBatch.add("MSB", "48 8B D1 48 8B 0D ? ? ? ? 41 B0 01 E9", [=](memory ptr) {
-			m_ModelSpawnBypass = ptr.as<decltype(m_ModelSpawnBypass)>();
-		});
-		//Fix Vectors (Used for fixing vectors, without = the ped will teleport to the middle of the map, called in the invoker) (RAGE\Invoker)
-		g_mainBatch.add("FV", "83 79 18 00 48 8B D1 74 4A FF 4A 18 48 63 4A 18 48 8D 41 04 48 8B 4C CA", [=](memory ptr) {
+		//Fix Vectors (Used for fixing vectors because of some odd padding system, called in the invoker) (RAGE\Invoker)
+		g_mainBatch.add("FV", "83 79 18 ? 48 8B D1 74 4A FF 4A 18 48 63 4A 18 48 8D 41 04 48 8B 4C CA", [=](memory ptr) {
 			m_FixVectors = ptr.as<decltype(m_FixVectors)>();
 		});
 		//Native Return Address (Used for changing and storing the native return address, called in the invoker) (RAGE\Invoker)
@@ -36,11 +32,7 @@ namespace Base::Core::Mem {
 		g_mainBatch.add("GLT", "75 ? E8 ? ? ? ? 8B 0D ? ? ? ? 65 48 8B 04 25 ? ? ? ? BA ? ? ? ? 48 8B 04 C8 8B 0C 02 D1 E9", [=](memory ptr) {
 			m_GetLabelText = ptr.sub(19).as<decltype(m_GetLabelText)>();
 		});
-		//Is Session Started (Used for checking if a session is started, use instead of the native) (Hooking\Natives)
-		g_mainBatch.add("CV", "40 38 35 ? ? ? ? 75 0E 4C 8B C3 49 8B D7 49 8B CE", [=](memory ptr) {
-			m_IsSessionStarted = ptr.add(3).rip().as<decltype(m_IsSessionStarted)>();
-		});
-		//Hwnd (Used for getting window functions, and checking which wnd is which) (Hooking\Main)
+		//Hwnd (Used for getting window functions, and checking which wnd is which) (Hooking\Renderer)
 		m_Hwnd = FindWindowA("grcWindow", nullptr);
 		if (!m_Hwnd) {
 			throw std::runtime_error("Failed to find the game's window.");

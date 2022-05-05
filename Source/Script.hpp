@@ -95,7 +95,7 @@ namespace Base::Core {
 			std::lock_guard lck(m_mutex);
 			m_scripts.clear();
 		}
-		void scrTick(std::string scr = "main_persistent") {
+		void scrTick(std::string scr) {
 			executeUnderScr(rage::joaat(scr), std::mem_fn(&fbrMgr::tick), this);
 		}
 		void tick() {

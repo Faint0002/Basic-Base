@@ -20,11 +20,10 @@ namespace Base::Core::Mem {
 	}
 	bool Hooking::RunScriptThreads(std::uint32_t opsToExecute) {
 		if (g_Running)
-			g_fbrMgr.scrTick();
+			g_fbrMgr.scrTick(NETWORK::NETWORK_IS_SESSION_ACTIVE() ? "freemode" : "main_persistent"); //I really should add a check to see if the scr is active
 		return detourHndle->m_runScriptThreadsHook.getOg<functionTypes::runScriptThreadsT>()(opsToExecute);
 	}
 	const char* Hooking::GetLabelText(void* unk, const char* label) {
-		//Looking back at this, this was retarded
 		auto ret = detourHndle->m_getLabelTextHook.getOg<functionTypes::getLabelTextT>()(unk, label);
 		auto setLbl = g_LabelManager.SetLabel(label, ret);
 		if (setLbl != ret)

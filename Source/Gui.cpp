@@ -97,15 +97,14 @@ namespace Base::Core::DirectX {
 							fiber::cur()->wait(10ms);
 						}
 						auto pos = ENTITY::GET_ENTITY_COORDS(PLAYER::PLAYER_PED_ID(), true);
-						auto veh = VEHICLE::CREATE_VEHICLE(hash, pos, 0.f, true, true);
-						if (*g_Pointers->m_IsSessionStarted) {
+						auto veh = VEHICLE::CREATE_VEHICLE(hash, pos, 0.f, true, false);
+						if (NETWORK::NETWORK_IS_SESSION_ACTIVE()) {
 							DECORATOR::DECOR_SET_INT(veh, "MPBitset", 0);
 							DECORATOR::DECOR_SET_INT(veh, "Player_Vehicle", NETWORK::NETWORK_HASH_FROM_PLAYER_HANDLE(PLAYER::PLAYER_ID()));
 							ENTITY::SET_ENTITY_CLEANUP_BY_ENGINE_(veh, TRUE);
 							auto netId = NETWORK::VEH_TO_NET(veh);
 							if (NETWORK::NETWORK_GET_ENTITY_IS_NETWORKED(veh))
 								NETWORK::SET_NETWORK_ID_EXISTS_ON_ALL_MACHINES(netId, true);
-							VEHICLE::SET_VEHICLE_IS_STOLEN(veh, false);
 						}
 						VEHICLE::SET_VEHICLE_NUMBER_PLATE_TEXT(veh, std::string(plateText).c_str());
 						VEHICLE::SET_VEHICLE_ENGINE_ON(veh, true, true, true);

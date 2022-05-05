@@ -31,9 +31,6 @@ namespace Base::Core::Mem {
 		CNetworkPlayerMgr** m_NetworkPlayerMgr;
 	public:
 		PVOID* m_NativeReturnAddress;
-		PVOID* m_ModelSpawnBypass;
-	public:
-		bool* m_IsSessionStarted;
 	public:
 		HWND m_Hwnd;
 	public:

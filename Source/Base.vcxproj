@@ -51,7 +51,7 @@
     <OutDir>$(SolutionDir)Build\Debug</OutDir>
     <IntDir>$(SolutionDir)Build\Debug-Intermediates</IntDir>
     <TargetName>Base</TargetName>
-    <IncludePath>$(SolutionDir)MinHook\include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)Source\ImGui;$(SolutionDir)Source\MuJS</IncludePath>
+    <IncludePath>$(SolutionDir)Libs\MinHook\Includes;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(SolutionDir)Source\ImGui</IncludePath>
     <LibraryPath>$(SolutionDir)lib\Release;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;$(SolutionDir)Source\ChakraCore;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
