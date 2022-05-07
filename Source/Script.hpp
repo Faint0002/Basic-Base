@@ -55,8 +55,10 @@ namespace Base::Core {
 			try {
 				m_func();
 			}
-			catch (...) {
-			
+			catch (std::runtime_error& ex) {
+				StackWalker m_stackWalker;
+				logEntry(LogColor::Red, "Exceptions", "Catched exception {} on a script fiber", ex.what());
+				m_stackWalker.ShowCallstack();
 			}
 			while (true) {
 				wait();

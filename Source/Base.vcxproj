@@ -114,6 +114,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Libs\JSON\Includes\JSON.hpp" />
+    <ClInclude Include="..\Libs\StackWalker\StackWalker.h" />
     <ClInclude Include="Cheat.hpp" />
     <ClInclude Include="Enums.hpp" />
     <ClInclude Include="FMT\core.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="VMT.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Libs\StackWalker\StackWalker.cpp" />
     <ClCompile Include="Cheat.cpp" />
     <ClCompile Include="Gui.cpp" />
     <ClCompile Include="Hooking.cpp" />

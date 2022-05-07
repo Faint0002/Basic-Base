@@ -111,8 +111,5 @@ namespace rage {
 		char pad_003C[20]; //0x003C
 		vector3 m_position; //0x0050
 	}; //Size: 0x005C
-	class CObject : public fwEntity
-	{
-	public:
-	}; //Size: 0x018C
+	class CObject : public fwEntity {}; //Size: 0x018C
 }

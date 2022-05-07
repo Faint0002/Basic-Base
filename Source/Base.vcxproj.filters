@@ -40,6 +40,9 @@
     <Filter Include="Header Files\Memory\Pattern Manager">
       <UniqueIdentifier>{476ddd3f-1911-4b74-89b9-796dcfce3cb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Libraries\StackWa%3bker">
+      <UniqueIdentifier>{98aaf5f4-8bdb-48b7-85a5-64af816ecf2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Includes.hpp">
@@ -174,6 +177,9 @@
     <ClInclude Include="Namespaces\RageEntity.hpp">
       <Filter>Header Files\Namespaces</Filter>
     </ClInclude>
+    <ClInclude Include="..\Libs\StackWalker\StackWalker.h">
+      <Filter>Libraries\StackWa%3bker</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -223,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="ImGui\imgui_tables.cpp">
       <Filter>Libraries\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Libs\StackWalker\StackWalker.cpp">
+      <Filter>Libraries\StackWa%3bker</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

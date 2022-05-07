@@ -65,6 +65,8 @@
 #define FMT_HEADER_ONLY
 #include "FMT/format.h"
 #include "FMT/format-inl.h"
+//StackWalker Includes
+#include "../Libs/StackWalker/StackWalker.h"
 //ImGui Defines
 IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 //Namespace Defines
