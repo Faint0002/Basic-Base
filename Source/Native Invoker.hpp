@@ -3,6 +3,7 @@
 #include "RageHashMap.hpp"
 #include "Logger.hpp"
 #include "Namespaces/Namespace Rage.hpp"
+#include "Namespaces/Vector.hpp"
 #include "Pointers.hpp"
 
 namespace Base::Core::Invoke {

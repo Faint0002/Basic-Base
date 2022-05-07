@@ -115,11 +115,25 @@
   <ItemGroup>
     <ClInclude Include="..\Libs\JSON\Includes\JSON.hpp" />
     <ClInclude Include="Cheat.hpp" />
+    <ClInclude Include="Enums.hpp" />
     <ClInclude Include="FMT\core.h" />
     <ClInclude Include="FMT\format-inl.h" />
     <ClInclude Include="FMT\format.h" />
     <ClInclude Include="Globals.hpp" />
     <ClInclude Include="LabelMgr.hpp" />
+    <ClInclude Include="Namespaces\AtArray.hpp" />
+    <ClInclude Include="Namespaces\Base.hpp" />
+    <ClInclude Include="Namespaces\BitBuffer.hpp" />
+    <ClInclude Include="Namespaces\Joaat.hpp" />
+    <ClInclude Include="Namespaces\NetGameEvent.hpp" />
+    <ClInclude Include="Namespaces\NetObject.hpp" />
+    <ClInclude Include="Namespaces\NetPlayer.hpp" />
+    <ClInclude Include="Namespaces\RageEntity.hpp" />
+    <ClInclude Include="Namespaces\ScriptHandlers.hpp" />
+    <ClInclude Include="Namespaces\ScrProgram.hpp" />
+    <ClInclude Include="Namespaces\SyncTree.hpp" />
+    <ClInclude Include="Namespaces\Vector.hpp" />
+    <ClInclude Include="Protections.hpp" />
     <ClInclude Include="RageHashMap.hpp" />
     <ClInclude Include="Fonts.hpp" />
     <ClInclude Include="Hooking.hpp" />

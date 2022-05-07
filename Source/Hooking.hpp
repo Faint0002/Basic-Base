@@ -55,29 +55,39 @@ namespace Base::Core::Mem {
 		static void* ConvertThreadToFiber(void* param);
 		static bool RunScriptThreads(std::uint32_t opsToExecute);
 		static const char* GetLabelText(void* unk, const char* label);
+		static bool ScriptedGameEvent(CScriptedGameEvent* sge, CNetGamePlayer* sender);
+		static bool SyncCanApply(rage::netSyncTree* netSyncTree, rage::netObject* netObject);
 	};
 	class detours {
 	public:
 		detours() :
 			m_convertThreadToFiberHook("CTTF", Mem::hMod("kernel32.dll").exportFunc("ConvertThreadToFiber").as<void*>(), Hooking::ConvertThreadToFiber),
 			m_runScriptThreadsHook("RST", g_Pointers->m_RunScriptThreads, Hooking::RunScriptThreads),
-			m_getLabelTextHook("GLT", g_Pointers->m_GetLabelText, Hooking::GetLabelText)
+			m_getLabelTextHook("GLT", g_Pointers->m_GetLabelText, Hooking::GetLabelText),
+			m_scriptedGameEventHook("SGE", g_Pointers->m_ScriptedGameEvent, Hooking::ScriptedGameEvent),
+			m_syncCanApplyHook("SCA", g_Pointers->m_SyncCanApply, Hooking::SyncCanApply)
 		{}
 	public:
 		void enable() {
 			m_convertThreadToFiberHook.enable();
 			m_runScriptThreadsHook.enable();
 			m_getLabelTextHook.enable();
+			m_scriptedGameEventHook.enable();
+			m_syncCanApplyHook.enable();
 		}
 		void disable() {
 			m_convertThreadToFiberHook.disable();
 			m_runScriptThreadsHook.disable();
 			m_getLabelTextHook.disable();
+			m_scriptedGameEventHook.disable();
+			m_syncCanApplyHook.disable();
 		}
 	public:
 		detouring m_convertThreadToFiberHook;
 		detouring m_runScriptThreadsHook;
 		detouring m_getLabelTextHook;
+		detouring m_scriptedGameEventHook;
+		detouring m_syncCanApplyHook;
 	};
 }
 

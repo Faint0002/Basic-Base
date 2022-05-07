@@ -4,27 +4,25 @@
 #include "Pointers.hpp"
 
 namespace Base::Core {
-	template <typename F, typename ...Args>
-	void executeUnderScr(rage::joaat_t script_hash, F&& callback, Args &&...args) {
+	template <typename call , typename ...arguments>
+	bool executeUnderScr(GtaThread* scr, call&& callback, arguments&&... args) {
 		auto tlsCtx = rage::tlsContext::get();
-		for (auto scrThr : *g_Pointers->m_ScriptThreads) {
-			//If our scr thread is null, continue. Same with thread id and if scr hash is not equal to the current scr hash, contuine and stop exec
-			if (!scrThr || !scrThr->m_context.m_thread_id || scrThr->m_context.m_script_hash != script_hash)
-				continue;
-			//Get our current thread (og) and set it here as a rage::scrThread function
-			auto OrginialThread = *tlsCtx->getScriptThread();
-			//Get our script thread and make it our scr thread (ptr)
-			*tlsCtx->getScriptThread() = scrThr;
-			//Set our thread active to true
-			*tlsCtx->isScriptThreadActive() = true;
-			//Invoke our callback and any args.
-			std::invoke(std::forward<F>(callback), std::forward<Args>(args)...);
-			//After invoke, set our thread back to our orginial thread
-			*tlsCtx->getScriptThread() = OrginialThread;
-			//Set our active thread to true/false according to if our og thread is null or not.
-			*tlsCtx->isScriptThreadActive() = OrginialThread != nullptr;
-			return;
-		}
+		//We do checks inside the script tick, this is just incase
+		if (!scr || !scr->m_context.m_thread_id)
+			return false;
+		//Get our current thread (og) and set it here as a rage::scrThread function
+		auto OrginialThread = *tlsCtx->getScriptThread();
+		//Get our script thread and make it our scr thread (ptr)
+		*tlsCtx->getScriptThread() = scr;
+		//Set our thread active to true
+		*tlsCtx->isScriptThreadActive() = true;
+		//Invoke our callback and any args.
+		std::invoke(std::forward<call>(callback), std::forward<arguments>(args)...);
+		//After invoke, set our thread back to our orginial thread
+		*tlsCtx->getScriptThread() = OrginialThread;
+		//Set our active thread to true/false according to if our og thread is null or not.
+		*tlsCtx->isScriptThreadActive() = OrginialThread != nullptr;
+		return true;
 	}
 	//Script Class
 	class fiber {
@@ -96,7 +94,17 @@ namespace Base::Core {
 			m_scripts.clear();
 		}
 		void scrTick(std::string scr) {
-			executeUnderScr(rage::joaat(scr), std::mem_fn(&fbrMgr::tick), this);
+			auto getThr = [=](std::string hash) {
+				for (auto& thread : *g_Pointers->m_ScriptThreads) {
+					if (thread->m_script_hash == rage::joaat(hash))
+						return thread;
+				}
+			};
+			auto thr = getThr(scr);
+			if (thr)
+				executeUnderScr(thr, std::mem_fn(&fbrMgr::tick), this);
+			else
+				fbrMgr::tick(); //Loop our orginial handler, without the script as a fallback.
 		}
 		void tick() {
 			static bool EnsureMainFiber = (ConvertThreadToFiber(nullptr), true);

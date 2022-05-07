@@ -132,6 +132,48 @@
     <ClInclude Include="FMT\format-inl.h">
       <Filter>Libraries\FMT</Filter>
     </ClInclude>
+    <ClInclude Include="Namespaces\NetPlayer.hpp">
+      <Filter>Header Files\Namespaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Namespaces\AtArray.hpp">
+      <Filter>Header Files\Namespaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Namespaces\ScriptHandlers.hpp">
+      <Filter>Header Files\Namespaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Namespaces\Joaat.hpp">
+      <Filter>Header Files\Namespaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Namespaces\ScrProgram.hpp">
+      <Filter>Header Files\Namespaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Namespaces\Base.hpp">
+      <Filter>Header Files\Namespaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Namespaces\BitBuffer.hpp">
+      <Filter>Header Files\Namespaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Namespaces\NetGameEvent.hpp">
+      <Filter>Header Files\Namespaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Namespaces\Vector.hpp">
+      <Filter>Header Files\Namespaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Protections.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Namespaces\SyncTree.hpp">
+      <Filter>Header Files\Namespaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Namespaces\NetObject.hpp">
+      <Filter>Header Files\Namespaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Namespaces\RageEntity.hpp">
+      <Filter>Header Files\Namespaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

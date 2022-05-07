@@ -8,6 +8,10 @@ namespace Base::functionTypes {
 	using runScriptThreadsT = bool(*)(std::uint32_t ops_to_execute);
 	using fixVectorsT = void(*)(rage::scrNativeCallContext*);
 	using getLabelTextT = const char*(*)(void* unk, const char* label);
+	using scriptedGameEventT = bool(*)(CScriptedGameEvent* sge, CNetGamePlayer* sender);
+	using readBitbufArrayT = bool(*)(rage::datBitBuffer* buffer, PVOID read, int bits, int unk);
+	using readBitbufDwordT = bool(*)(rage::datBitBuffer* buffer, PVOID read, int bits);
+	using syncCanApplyT = bool(*)(rage::netSyncTree* netSyncTree, rage::netObject* netObject);
 }
 
 namespace Base::Core::Mem {
@@ -21,6 +25,10 @@ namespace Base::Core::Mem {
 		functionTypes::runScriptThreadsT m_RunScriptThreads;
 		functionTypes::fixVectorsT m_FixVectors;
 		functionTypes::getLabelTextT m_GetLabelText;
+		functionTypes::scriptedGameEventT m_ScriptedGameEvent;
+		functionTypes::readBitbufArrayT m_ReadBitbufArray;
+		functionTypes::readBitbufDwordT m_ReadBitbufDword;
+		functionTypes::syncCanApplyT m_SyncCanApply;
 	public:
 		void** m_SendChatMsgPtr;
 	public:
