@@ -6,7 +6,6 @@
 #include "NetPlayer.hpp"
 #include "NetObject.hpp"
 #include "SyncTree.hpp"
-#include "FwEntity.hpp"
 
 namespace rage {
 	//Invoker Defines
