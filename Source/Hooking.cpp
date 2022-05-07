@@ -47,20 +47,22 @@ namespace Base::Core::Mem {
 		return detourHndle->m_scriptedGameEventHook.getOg<functionTypes::scriptedGameEventT>()(sge, sender);
 	}
 	bool Hooking::SyncCanApply(rage::netSyncTree* netSyncTree, rage::netObject* netObject) {
-		auto networkMgr = *g_Pointers->m_NetworkPlayerMgr;
-		auto syncTree = netSyncTree->m_sync_tree_node;
-		if (networkMgr != nullptr) {
-			auto sender = networkMgr->m_player_list[netObject->m_owner_id];
-			if (sender != nullptr) {
-				if (sender->is_valid()) {
-					auto senderName = std::string(sender->get_name());
-					auto gameObj = netObject->GetGameObject();
-					if (gameObj != nullptr) {
-						auto modelInfo = gameObj->m_model_info;
-						for (auto& mdl : Protections::m_crashModels) {
-							if (modelInfo->m_model == mdl.modelHash && *mdl.modelBlockToggle) {
-								logEntry(LogColor::White, "Model Protections", "{} tried to send the crash object '{}'", senderName, mdl.modelName);
-								return false;
+		if (NETWORK::NETWORK_IS_SESSION_ACTIVE()) {
+			auto networkMgr = *g_Pointers->m_NetworkPlayerMgr;
+			auto syncTree = netSyncTree->m_sync_tree_node;
+			if (networkMgr != nullptr) {
+				auto sender = networkMgr->m_player_list[netObject->m_owner_id];
+				if (sender != nullptr) {
+					if (sender->is_valid()) {
+						auto senderName = std::string(sender->get_name());
+						auto gameObj = netObject->GetGameObject();
+						if (gameObj != nullptr) {
+							auto modelInfo = gameObj->m_model_info;
+							for (auto& mdl : Protections::m_crashModels) {
+								if (modelInfo->m_model == mdl.modelHash && *mdl.modelBlockToggle) {
+									logEntry(LogColor::White, "Model Protections", "{} tried to send the crash object '{}'", senderName, mdl.modelName);
+									return false;
+								}
 							}
 						}
 					}

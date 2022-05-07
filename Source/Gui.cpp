@@ -131,7 +131,7 @@ namespace Base::Core::DirectX {
 					}
 					else {
 						ImGui::Text("In Session: No");
-						ImGui::Text("Player Count:Offline");
+						ImGui::Text("Player Count: Offline");
 						ImGui::Text("Host Name: Offline");
 						ImGui::Text(fmt::format("Your PID: {}", Information::selfPlayerId).c_str());
 						ImGui::Text(fmt::format("Your Name: {}", Information::selfName).c_str());
