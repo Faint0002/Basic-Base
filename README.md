@@ -7,7 +7,7 @@
 
 # Issues
 - HashMapping must be changed for steam
-- Visual C++ is neeeded (Get here: https://docs.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist?view=msvc-170)
+- Visual C++ is neeeded (Get it here: https://docs.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist?view=msvc-170)
 
 # Projects used
 - ImGui (github.com/ocornut/imgui)
