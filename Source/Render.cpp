@@ -44,14 +44,7 @@ namespace Base::Render {
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
-		if (g_Gui->m_Opened) {
-			ImGui::GetIO().MouseDrawCursor = true;
-			ImGui::GetIO().ConfigFlags &= ~ImGuiConfigFlags_NoMouse;
-		}
-		else {
-			ImGui::GetIO().MouseDrawCursor = false;
-			ImGui::GetIO().ConfigFlags |= ~ImGuiConfigFlags_NoMouse;
-		}
+		ImGui::GetIO().MouseDrawCursor = g_Gui->m_Opened;
 		if (g_Gui->m_Opened)
 			g_Gui->GuiWindow();
 		ImGui::EndFrame();

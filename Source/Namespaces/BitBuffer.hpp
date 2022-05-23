@@ -47,7 +47,7 @@ namespace rage {
 			return false;
 		}
 		bool ReadDword(uint32_t* integer, int bits) {
-			return Base::Core::Mem::g_Pointers->m_ReadBitbufDword(this, integer, bits);
+			return g_Pointers->m_ReadBitbufDword(this, integer, bits);
 		}
 		bool ReadInt32(int32_t* integer, int bits) {
 			int32_t v8;

@@ -32,10 +32,6 @@ namespace Base::Core::Mem {
 		g_mainBatch.add("GLT", "75 ? E8 ? ? ? ? 8B 0D ? ? ? ? 65 48 8B 04 25 ? ? ? ? BA ? ? ? ? 48 8B 04 C8 8B 0C 02 D1 E9", [=](memory ptr) {
 			m_GetLabelText = ptr.sub(19).as<decltype(m_GetLabelText)>();
 		});
-		//Scripted Game Event (Used for blocking script events) (RAGE\ScriptEvets)
-		g_mainBatch.add("SGE", "40 53 48 81 EC ? ? ? ? 44 8B 81 ? ? ? ? 4C 8B CA 41 8D 40 FF 3D ? ? ? ? 77 42", [=](memory ptr) {
-			m_ScriptedGameEvent = ptr.as<decltype(m_ScriptedGameEvent)>();
-		});
 		//Read Bitbuffer Array
 		g_mainBatch.add("RBA", "48 89 5C 24 ? 57 48 83 EC 30 41 8B F8 4C", [=](memory ptr) {
 			m_ReadBitbufArray = ptr.as<decltype(m_ReadBitbufArray)>();
@@ -44,9 +40,21 @@ namespace Base::Core::Mem {
 		g_mainBatch.add("RBD", "48 89 74 24 ? 57 48 83 EC 20 48 8B D9 33 C9 41 8B F0 8A", [=](memory ptr) {
 			m_ReadBitbufDword = ptr.sub(5).as<decltype(m_ReadBitbufDword)>();
 		});
-		//Sync Can Apply (Used for blocking model/object syncs) (Network\Protecionts)
+		//Sync Can Apply (Used for blocking model/object syncs) (Network\Protections)
 		g_mainBatch.add("SCA", "49 8B CE FF 50 70 84 C0 74 31 33 FF", [=](memory ptr) {
 			m_SyncCanApply = ptr.sub(44).as<decltype(m_SyncCanApply)>();
+		});
+		//Convert Handle (Used for converting classes to usable handles) (Network\Protections)
+		g_mainBatch.add("CH", "49 8B CE E8 ? ? ? ? 49 8D 76 20", [=](memory ptr) {
+			m_ConvertHandle = ptr.add(4).rip().as<decltype(m_ConvertHandle)>();
+		});
+		//Network Event Handler (Used for blocking network events) (Network\Protections)
+		g_mainBatch.add("NEH", "66 41 83 F9 ? 0F 83 ? ? ? ?", [=](memory ptr) {
+			m_NetworkEventHandler = ptr.as<decltype(m_NetworkEventHandler)>();
+		});
+		//Send Event Ack (Used for acknowledging network events, used to stop events from being sent and avoid overfilling the buffer) (Network\Protections)
+		g_mainBatch.add("SEA", "48 89 6C 24 ? 48 89 74 24 ? 57 48 83 EC 20 80 7A", [=](memory ptr) {
+			m_SendEventAck = ptr.sub(5).as<decltype(m_SendEventAck)>();
 		});
 		//Hwnd (Used for getting window functions, and checking which wnd is which) (Hooking\Renderer)
 		m_Hwnd = FindWindowA("grcWindow", nullptr);

@@ -8,10 +8,12 @@ namespace Base::functionTypes {
 	using runScriptThreadsT = bool(*)(std::uint32_t ops_to_execute);
 	using fixVectorsT = void(*)(rage::scrNativeCallContext*);
 	using getLabelTextT = const char*(*)(void* unk, const char* label);
-	using scriptedGameEventT = bool(*)(CScriptedGameEvent* sge, CNetGamePlayer* sender);
 	using readBitbufArrayT = bool(*)(rage::datBitBuffer* buffer, PVOID read, int bits, int unk);
 	using readBitbufDwordT = bool(*)(rage::datBitBuffer* buffer, PVOID read, int bits);
 	using syncCanApplyT = bool(*)(rage::netSyncTree* netSyncTree, rage::netObject* netObject);
+	using convertHandleT = int32_t(*)(void* hndle);
+	using networkEventHandlerT = bool(*)(std::int64_t* eventMgr, CNetGamePlayer* source, CNetGamePlayer* target, uint16_t id, int idx, int handledBitset, int64_t bitBufSize, int64_t bitBuf);
+	using sendEventAckT = void(*)(std::int64_t* eventMgr, CNetGamePlayer* source, CNetGamePlayer* target, int idx, int handledBitset);
 }
 
 namespace Base::Core::Mem {
@@ -25,10 +27,12 @@ namespace Base::Core::Mem {
 		functionTypes::runScriptThreadsT m_RunScriptThreads;
 		functionTypes::fixVectorsT m_FixVectors;
 		functionTypes::getLabelTextT m_GetLabelText;
-		functionTypes::scriptedGameEventT m_ScriptedGameEvent;
 		functionTypes::readBitbufArrayT m_ReadBitbufArray;
 		functionTypes::readBitbufDwordT m_ReadBitbufDword;
 		functionTypes::syncCanApplyT m_SyncCanApply;
+		functionTypes::convertHandleT m_ConvertHandle;
+		functionTypes::networkEventHandlerT m_NetworkEventHandler;
+		functionTypes::sendEventAckT m_SendEventAck;
 	public:
 		void** m_SendChatMsgPtr;
 	public:

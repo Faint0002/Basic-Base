@@ -64,12 +64,22 @@ namespace Base::Core::DirectX {
 						ImGui::BeginTabBar("PlayerOptionsBar");
 						if (ImGui::BeginTabItem("Teleports")) {
 							if (ImGui::Button("Teleport To Player")) {
-								Entity handle;
-								Vector3 coords = ENTITY::GET_ENTITY_COORDS(PLAYER::GET_PLAYER_PED(g_SelectedPlayer), false);
-								PED::IS_PED_IN_ANY_VEHICLE(PLAYER::PLAYER_PED_ID(), false) ?
-									handle = PED::GET_VEHICLE_PED_IS_USING(PLAYER::PLAYER_PED_ID()) :
-									handle = PLAYER::PLAYER_PED_ID();
-								ENTITY::SET_ENTITY_COORDS(handle, coords, true, true, true, false);
+								JobStart(=) {
+									Entity handle;
+									auto coords = ENTITY::GET_ENTITY_COORDS(PLAYER::GET_PLAYER_PED(g_SelectedPlayer), false);
+									PED::IS_PED_IN_ANY_VEHICLE(PLAYER::PLAYER_PED_ID(), false) ?
+										handle = PED::GET_VEHICLE_PED_IS_USING(PLAYER::PLAYER_PED_ID()) :
+										handle = PLAYER::PLAYER_PED_ID();
+									ENTITY::SET_ENTITY_COORDS(handle, coords, true, true, true, false);
+								} JobEnd;
+							}
+							if (ImGui::Button("Desync Player")) {
+								JobStart(=) {
+									auto cPed = selectedPlayer->m_player_info->m_ped;
+									auto pPed = g_Pointers->m_ConvertHandle(cPed);
+									(*g_Pointers->m_NetworkPlayerMgr)->RemovePlayer(selectedPlayer);
+									WEAPON::REMOVE_ALL_PED_WEAPONS(pPed, true);
+								} JobEnd;
 							}
 							ImGui::EndTabItem();
 						}

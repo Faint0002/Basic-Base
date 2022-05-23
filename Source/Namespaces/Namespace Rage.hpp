@@ -21,6 +21,7 @@ namespace rage {
 	};
 	using scrNativeHash = std::uint64_t;
 	using scrNativeHandler = void(*)(scrNativeCallContext*);
+	class datBitBuffer;
 }
 using Void = void;
 using Any = std::uint32_t;

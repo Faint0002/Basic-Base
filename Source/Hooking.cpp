@@ -1,6 +1,7 @@
 #include "Hooking.hpp"
 #include "LabelMgr.hpp"
 #include "Protections.hpp"
+#include "Namespaces/BitBuffer.hpp"
 
 namespace Base::Core::Mem {
 	static std::unique_ptr<detours> detourHndle;
@@ -31,20 +32,44 @@ namespace Base::Core::Mem {
 		}
 		return detourHndle->m_getLabelTextHook.getOg<functionTypes::getLabelTextT>()(unk, label);
 	}
-	bool Hooking::ScriptedGameEvent(CScriptedGameEvent* sge, CNetGamePlayer* sender) {
-		auto args = sge->m_args;
-		auto argSize = sge->m_args_size;
-		auto senderName = sender->get_name();
-		auto isRecieverYourself = (*g_Pointers->m_NetworkPlayerMgr)->m_local_net_player == sge->m_target_player;
-		if (isRecieverYourself) {
+	bool Hooking::NetworkEventHandler(std::int64_t* eventMgr, CNetGamePlayer* source, CNetGamePlayer* target, uint16_t id, int idx, int handledBitset, int64_t bitBufSize, int64_t bitBuf) {
+		auto eventName = *(char**)(eventMgr + 8i64 * id + 243376);
+		auto buffer = std::make_unique<rage::datBitBuffer>((void*)bitBuf, (uint32_t)bitBufSize);
+		if (eventName == nullptr || source == nullptr || source->m_player_id < 0 || source->m_player_id >= 32) {
+			g_Pointers->m_SendEventAck(eventMgr, source, target, id, handledBitset);
+			return true;
+		}
+		switch (id) {
+		case eRockstarEvent::SCRIPTED_GAME_EVENT: {
+			auto sge = CScriptedGameEvent();
+			buffer->ReadDword(&sge.m_args_size, 32);
+			if (sge.m_args_size <= 0x1AF)
+				buffer->ReadArray(&sge.m_args, 8 * sge.m_args_size);
 			for (auto& evnt : Protections::m_scriptEvents) {
-				if (args[0] == evnt.eventHash && *evnt.eventBlockToggle) {
-					logEntry(LogColor::White, "SE Protections", "{} has tried to send the event '{}'", senderName, evnt.eventName);
-					return true;
+				if (sge.m_args[0] == evnt.eventHash && *evnt.eventBlockToggle) {
+					logEntry(LogColor::White, "SE Protections", "{} has tried to send the event '{}'", source->get_name(), evnt.eventName);
+					g_Pointers->m_SendEventAck(eventMgr, source, target, id, handledBitset);
+					return false;
 				}
 			}
+			buffer->Seek(0);
+		} break;
+		case eRockstarEvent::NETWORK_INCREMENT_STAT_EVENT: {
+			rage::joaat_t stat{};
+			buffer->ReadDword(&stat, 32);
+			std::int32_t amount{};
+			buffer->ReadInt32(&amount, 32);
+			for (auto& evnt : Protections::m_reportHashes) {
+				if (stat == evnt.modelHash && *evnt.modelBlockToggle) {
+					logEntry(LogColor::White, "Report Protections", "{} has tried to send the report '{:X}' (ammount: %i)", source->get_name(), evnt.modelHash, amount);
+					g_Pointers->m_SendEventAck(eventMgr, source, target, id, handledBitset);
+					return false;
+				}
+			}
+			buffer->Seek(0);
+		} break;
 		}
-		return detourHndle->m_scriptedGameEventHook.getOg<functionTypes::scriptedGameEventT>()(sge, sender);
+		return detourHndle->m_getLabelTextHook.getOg<functionTypes::networkEventHandlerT>()(eventMgr, source, target, id, idx, handledBitset, bitBufSize, bitBuf);
 	}
 	bool Hooking::SyncCanApply(rage::netSyncTree* netSyncTree, rage::netObject* netObject) {
 		if (NETWORK::NETWORK_IS_SESSION_ACTIVE()) {

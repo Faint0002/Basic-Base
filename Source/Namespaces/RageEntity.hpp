@@ -15,7 +15,6 @@ namespace rage {
 		char pad_009D[0x2A2]; //0x009E
 		int32_t m_handling_type; //0x0340
 	}; //Size: 0x0344
-	//ReClass (Offsets)
 	class fwDrawData {
 	public:
 		char pad_0000[904]; //0x0000
